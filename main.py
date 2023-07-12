@@ -10,21 +10,14 @@ def generate_factors(pool):
 
 
 def find_largest_palindrome(max_factor: int, min_factor: int):
-    def make_pool(maximum: int) -> range:
-        return range(maximum, min_factor - 1, -1)
-
-    pool = make_pool(max_factor)
     largest_palindrome = 0
-    largest_factors = (0, 0)
-    for factors in generate_factors(pool):
+    for factors in generate_factors(range(max_factor, min_factor - 1, -1)):
         product = factors[0] * factors[1]
         if product <= largest_palindrome:
             continue
         if is_palindrome(product):
             largest_palindrome = product
-            largest_factors = factors
-            pool = make_pool(factors[0] - 1)
-    return largest_palindrome, largest_factors
+    return largest_palindrome
 
 
 if __name__ == '__main__':
